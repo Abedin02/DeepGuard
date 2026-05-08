@@ -31,8 +31,8 @@ env/
 *.env
 
 # Firebase / Google Cloud
-firebase-service-account.json
-*-service-account.json
+# firebase-service-account.json
+# *-service-account.json
 *.json.key
 .firebase/
 firebase-debug.log
