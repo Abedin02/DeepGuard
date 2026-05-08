@@ -1,0 +1,59 @@
+# ══════════════════════════════════════════════════════════════════════════
+# DeepGuard Backend — Python Dependencies
+# Python 3.11 ONLY (TF has no wheels for 3.12+)
+#
+# macOS Apple Silicon (M1/M2/M3/M4): ✅ supported
+# macOS Intel:                        ✅ supported
+#
+# Fresh venv setup (macOS):
+#   deactivate
+#   rm -rf .venv
+#   python3.11 -m venv .venv
+#   source .venv/bin/activate
+#   pip install --upgrade pip
+#   pip install -r requirements.txt
+# ══════════════════════════════════════════════════════════════════════════
+
+# ── Typing fix — must come first to resolve TF vs FastAPI conflict ─────────
+typing-extensions>=4.8.0
+
+# ── Web framework ──────────────────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+
+# ── Firebase ───────────────────────────────────────────────────────────────
+firebase-admin>=6.5.0
+
+
+# ── TensorFlow ─────────────────────────────────────────────────────────────
+# 2.15.x is the last version with the tensorflow.keras API.
+# Use --ignore-requires-python if pip complains about typing-extensions.
+tensorflow>=2.15.0,<2.16.0
+
+# ── HDF5 ───────────────────────────────────────────────────────────────────
+h5py>=3.10.0,<4.0
+
+# ── Vision / image processing ──────────────────────────────────────────────
+Pillow>=10.0
+opencv-python-headless>=4.9.0
+
+# ── Audio processing ───────────────────────────────────────────────────────
+librosa>=0.10.0
+soundfile>=0.12.0
+
+# ── Visualization ──────────────────────────────────────────────────────────
+matplotlib>=3.8.0
+
+# ── Numeric ────────────────────────────────────────────────────────────────
+numpy>=1.24,<2.0
+
+# ── LLM — AI analysis summaries (free, no credit card needed) ─────────────
+# Get your free key at https://console.groq.com/
+# Add GROQ_API_KEY=your_key to your .env file
+groq>=0.11.0
+
+# ── Utilities ──────────────────────────────────────────────────────────────
+python-dotenv>=1.0.0
+pydantic>=2.7.0
+certifi>=2024.0.0
