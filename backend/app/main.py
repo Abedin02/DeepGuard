@@ -16,6 +16,7 @@ from pathlib import Path
 from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from services.model_downloader import ensure_model_files
 
 from app.firebase_client import db, verify_token
 from typing import Optional
@@ -31,6 +32,8 @@ app = FastAPI(
     version="1.0.0",
 )
 
+
+ensure_model_files()  # download models at startup (if not already present) 
 
 @app.on_event("startup")
 def preload_models():
