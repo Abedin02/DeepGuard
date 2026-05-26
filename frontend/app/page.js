@@ -7,6 +7,8 @@ import { useTheme } from '@/context/ThemeContext'
 import ScanLoading from '@/components/ScanLoading'
 import BlogCarousel from '@/components/BlogCarousel'
 import FAQ from '@/components/FAQ'
+import { TypingAnimation } from '@/registry/magicui/typing-animation'
+import { RippleButton } from '@/registry/magicui/ripple-button'
 import { auth } from '@/lib/firebase'
 import { saveMedia } from '@/lib/mediaCache'
 
@@ -172,7 +174,7 @@ export default function Home() {
   const handleScanComplete = () => { if (pendingId) router.push(`/results/${pendingId}`) }
 
   return (
-    <div style={{ background: theme.bg, minHeight: '100vh', fontFamily: FONT, transition: 'background-color 0.3s ease' }}>
+    <div style={{ background: 'transparent', minHeight: '100vh', fontFamily: FONT, transition: 'background-color 0.3s ease' }}>
 
       {/* Hero */}
       <div style={{ maxWidth: '1480px', margin: '0 auto', padding: '1.5rem 1.5rem 1rem', display: 'grid', gridTemplateColumns: 'minmax(0, 1.22fr) minmax(500px, 1.05fr)', gap: '1.5rem', alignItems: 'stretch' }}>
@@ -180,15 +182,19 @@ export default function Home() {
         {/* LEFT */}
         <div style={{ backgroundColor: theme.cardBg, borderRadius: '28px', border: `1px solid ${theme.border}`, boxShadow: theme.boxShadow, padding: '1.5rem', minHeight: '100%', display: 'flex', flexDirection: 'column', transition: 'background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease' }}>
           <h1 style={{ margin: '0 0 1.25rem', fontSize: '2.45rem', fontWeight: '900', color: theme.text, lineHeight: 1.1, fontFamily: FONT, transition: 'color 0.3s ease' }}>
-            What Makes Deepfakes Convincing?
+            <TypingAnimation>What Makes Deepfakes Convincing?</TypingAnimation>
           </h1>
 
           <p style={{ color: theme.muted, fontSize: '1.18rem', lineHeight: 1.8, margin: '0 0 0.75rem', maxWidth: '620px', fontFamily: FONT, transition: 'color 0.3s ease' }}>
-            Deepfakes are edited or AI-generated content designed to imitate real people. They often look believable because modern tools can mimic skin texture, lighting, and facial structure in seconds.
+            <TypingAnimation>
+              Deepfakes are edited or AI-generated content designed to imitate real people. They often look believable because modern tools can mimic skin texture, lighting, and facial structure in seconds.
+            </TypingAnimation>
           </p>
 
           <p style={{ color: theme.muted, fontSize: '1.18rem', lineHeight: 1.8, margin: '0 0 1rem', maxWidth: '620px', fontFamily: FONT, transition: 'color 0.3s ease' }}>
-            The hardest part is that small errors can be easy to miss. Look closely at edges, shadows, facial symmetry, background consistency, and skin detail. Comparing an authentic image next to an edited version helps train the eye.
+            <TypingAnimation delay={7600}>
+              The hardest part is that small errors can be easy to miss. Look closely at edges, shadows, facial symmetry, background consistency, and skin detail. Comparing an authentic image next to an edited version helps train the eye.
+            </TypingAnimation>
           </p>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginTop: 'auto' }}>
@@ -241,7 +247,7 @@ export default function Home() {
                 ) : (
                   <img src={preview} alt="Preview" style={{ maxHeight: '250px', maxWidth: '100%', borderRadius: '12px', objectFit: 'contain' }} />
                 )}
-                <button onClick={(e) => { e.stopPropagation(); setPreview(null); setSelectedFile(null); setFileType('image'); setThumbnail(null); setError(null) }} style={{ fontSize: '0.9rem', color: theme.muted, background: 'transparent', border: `1px solid ${theme.border}`, borderRadius: '8px', padding: '0.45rem 0.95rem', cursor: 'pointer', fontFamily: FONT, transition: 'color 0.3s ease, border-color 0.3s ease' }}>Remove</button>
+                <RippleButton onClick={(e) => { e.stopPropagation(); setPreview(null); setSelectedFile(null); setFileType('image'); setThumbnail(null); setError(null) }} style={{ fontSize: '0.9rem', color: theme.muted, background: 'transparent', border: `1px solid ${theme.border}`, borderRadius: '8px', padding: '0.45rem 0.95rem', cursor: 'pointer', fontFamily: FONT, transition: 'color 0.3s ease, border-color 0.3s ease' }}>Remove</RippleButton>
               </>
             ) : (
               <>
@@ -250,9 +256,9 @@ export default function Home() {
                   <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
                 </svg>
                 <p style={{ margin: 0, fontWeight: '600', fontSize: '0.95rem', color: theme.text, fontFamily: FONT, transition: 'color 0.3s ease' }}>Drop image, video, or audio here</p>
-                <button onClick={(e) => { e.stopPropagation(); fileInputRef.current.click() }} style={{ marginTop: '0.25rem', padding: '0.6rem 1.5rem', background: DEEP_GRADIENT, color: '#fff', border: 'none', borderRadius: '10px', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', fontFamily: FONT, boxShadow: '0 10px 22px rgba(15, 37, 87, 0.16)' }}>
+                <RippleButton onClick={(e) => { e.stopPropagation(); fileInputRef.current.click() }} style={{ marginTop: '0.25rem', padding: '0.6rem 1.5rem', background: DEEP_GRADIENT, color: '#fff', border: 'none', borderRadius: '10px', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', fontFamily: FONT, boxShadow: '0 10px 22px rgba(15, 37, 87, 0.16)' }}>
                   Browse Files
-                </button>
+                </RippleButton>
               </>
             )}
           </div>
@@ -270,10 +276,10 @@ export default function Home() {
 
           <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,video/mp4,video/quicktime,video/x-msvideo,video/x-matroska,audio/mpeg,audio/wav,audio/aac" style={{ display: 'none' }} onChange={(e) => handleFile(e.target.files[0])} />
 
-          <button onClick={handleScan} disabled={!selectedFile || loading} style={{ width: '100%', padding: '0.9rem', background: selectedFile && !loading ? DEEP_GRADIENT : theme.border, color: selectedFile && !loading ? '#fff' : theme.muted, border: 'none', borderRadius: '14px', fontSize: '1rem', fontWeight: '800', cursor: selectedFile && !loading ? 'pointer' : 'not-allowed', fontFamily: FONT, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', transition: 'background 0.2s', boxShadow: selectedFile && !loading ? '0 14px 28px rgba(15, 37, 87, 0.2)' : 'none' }} onMouseEnter={e => { if (selectedFile && !loading) e.currentTarget.style.background = DEEP_GRADIENT_HOVER }} onMouseLeave={e => { if (selectedFile && !loading) e.currentTarget.style.background = DEEP_GRADIENT }}>
+          <RippleButton onClick={handleScan} disabled={!selectedFile || loading} style={{ width: '100%', padding: '0.9rem', background: selectedFile && !loading ? DEEP_GRADIENT : theme.border, color: selectedFile && !loading ? '#fff' : theme.muted, border: 'none', borderRadius: '14px', fontSize: '1rem', fontWeight: '800', cursor: selectedFile && !loading ? 'pointer' : 'not-allowed', fontFamily: FONT, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', transition: 'background 0.2s', boxShadow: selectedFile && !loading ? '0 14px 28px rgba(15, 37, 87, 0.2)' : 'none' }} onMouseEnter={e => { if (selectedFile && !loading) e.currentTarget.style.background = DEEP_GRADIENT_HOVER }} onMouseLeave={e => { if (selectedFile && !loading) e.currentTarget.style.background = DEEP_GRADIENT }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
             {loading ? 'Scanning...' : 'Start Detection'}
-          </button>
+          </RippleButton>
         </div>
       </div>
 
@@ -283,9 +289,9 @@ export default function Home() {
             You think you can detect a deepfake? Try it out
           </p>
           <Link href="/game" style={{ textDecoration: 'none' }}>
-            <button style={{ background: DEEP_GRADIENT, color: '#fff', border: 'none', borderRadius: '12px', padding: '0.8rem 1.4rem', fontSize: '0.95rem', fontWeight: '700', cursor: 'pointer', fontFamily: FONT, boxShadow: '0 14px 28px rgba(15, 37, 87, 0.16)' }}>
+            <RippleButton style={{ background: DEEP_GRADIENT, color: '#fff', border: 'none', borderRadius: '12px', padding: '0.8rem 1.4rem', fontSize: '0.95rem', fontWeight: '700', cursor: 'pointer', fontFamily: FONT, boxShadow: '0 14px 28px rgba(15, 37, 87, 0.16)' }}>
               Play The Game
-            </button>
+            </RippleButton>
           </Link>
         </div>
       </div>

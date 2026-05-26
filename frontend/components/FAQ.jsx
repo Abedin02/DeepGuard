@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useTheme } from '@/context/ThemeContext'
+import { RippleButton } from '@/registry/magicui/ripple-button'
 
 const FONT = "'Jost', sans-serif"
 
@@ -77,7 +78,7 @@ export default function FAQ() {
               transition: 'border-color 0.3s ease',
             }}
           >
-            <button
+            <RippleButton
               onClick={() => toggleBox(index)}
               style={{
                 width: '100%',
@@ -105,7 +106,7 @@ export default function FAQ() {
               }}>
                 ▼
               </span>
-            </button>
+            </RippleButton>
 
             <div
               style={{

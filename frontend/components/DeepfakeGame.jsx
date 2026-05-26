@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useTheme } from '@/context/ThemeContext'
+import { RippleButton } from '@/registry/magicui/ripple-button'
 
 const FONT = "'Jost', sans-serif"
 const DEEP_GRADIENT = 'linear-gradient(135deg, #0f2557 0%, #163d86 52%, #2454b8 100%)'
@@ -145,18 +146,18 @@ export default function DeepfakeGame() {
       </div>
 
       <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.75rem' }}>
-        <button
+        <RippleButton
           onClick={() => handleGuess('REAL')}
           style={{ flex: 1, padding: '0.65rem 0.9rem', background: 'linear-gradient(135deg, #0f766e 0%, #14b8a6 100%)', color: '#ecfeff', border: '1px solid rgba(153, 246, 228, 0.25)', borderRadius: '14px', fontSize: '0.9rem', fontWeight: '800', cursor: 'pointer', fontFamily: FONT, boxShadow: '0 8px 16px rgba(15, 118, 110, 0.28)' }}
         >
           REAL
-        </button>
-        <button
+        </RippleButton>
+        <RippleButton
           onClick={() => handleGuess('FAKE')}
           style={{ flex: 1, padding: '0.65rem 0.9rem', background: 'linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%)', color: '#fff1f2', border: '1px solid rgba(254, 202, 202, 0.22)', borderRadius: '14px', fontSize: '0.9rem', fontWeight: '800', cursor: 'pointer', fontFamily: FONT, boxShadow: '0 8px 16px rgba(127, 29, 29, 0.3)' }}
         >
           FAKE
-        </button>
+        </RippleButton>
       </div>
 
       {gameResult && (
@@ -166,9 +167,9 @@ export default function DeepfakeGame() {
         </div>
       )}
 
-      <button onClick={handleNextRound} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: DEEP_GRADIENT, color: '#fff', border: 'none', borderRadius: '12px', padding: '0.55rem 1rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', fontFamily: FONT, transition: 'background 0.2s', boxShadow: '0 14px 28px rgba(15, 37, 87, 0.16)' }} onMouseEnter={e => e.currentTarget.style.background = DEEP_GRADIENT_HOVER} onMouseLeave={e => e.currentTarget.style.background = DEEP_GRADIENT}>
+      <RippleButton onClick={handleNextRound} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: DEEP_GRADIENT, color: '#fff', border: 'none', borderRadius: '12px', padding: '0.55rem 1rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', fontFamily: FONT, transition: 'background 0.2s', boxShadow: '0 14px 28px rgba(15, 37, 87, 0.16)' }} onMouseEnter={e => e.currentTarget.style.background = DEEP_GRADIENT_HOVER} onMouseLeave={e => e.currentTarget.style.background = DEEP_GRADIENT}>
         Next Image
-      </button>
+      </RippleButton>
     </div>
   )
 }

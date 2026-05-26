@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useTheme } from '@/context/ThemeContext'
 import { loginWithGoogle, loginWithFacebook, loginWithEmail, registerWithEmail, sendPasswordReset } from '../../lib/auth.js'
 import { updateProfile } from 'firebase/auth'
+import { RippleButton } from '@/registry/magicui/ripple-button'
 
 const FONT = "'Jost', sans-serif"
 
@@ -94,7 +95,7 @@ export default function Auth() {
   }
 
   return (
-    <div style={{ height: 'calc(100vh - 72px)', backgroundColor: theme.bg, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '3rem', fontFamily: FONT, overflow: 'hidden', transition: 'background-color 0.3s ease, color 0.3s ease' }}>
+    <div style={{ height: 'calc(100vh - 72px)', backgroundColor: 'transparent', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '3rem', fontFamily: FONT, overflow: 'hidden', transition: 'background-color 0.3s ease, color 0.3s ease' }}>
       <div style={{ width: '100%', maxWidth: '380px' }}>
 
         {/* Logo */}
@@ -126,7 +127,7 @@ export default function Auth() {
               {getTabLabels().map((label, i) => {
                 const active = i === getActiveIndex()
                 return (
-                  <button
+                  <RippleButton
                     key={label}
                     onClick={() => {
                       if (i === 0) setMode('login')
@@ -148,7 +149,7 @@ export default function Auth() {
                     }}
                   >
                     {label}
-                  </button>
+                  </RippleButton>
                 )
               })}
             </div>
@@ -188,33 +189,33 @@ export default function Auth() {
               </div>
             )}
 
-            <button
+            <RippleButton
               type="submit"
               style={{ width: '100%', padding: '0.8rem', backgroundColor: theme.primary, color: '#fff', border: 'none', borderRadius: '10px', fontSize: '0.95rem', fontWeight: '800', cursor: 'pointer', fontFamily: FONT, marginTop: '0.5rem', transition: 'background 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.backgroundColor = theme.primary}
               onMouseLeave={e => e.currentTarget.style.backgroundColor = theme.primary}
             >
               {mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Reset Password'}
-            </button>
+            </RippleButton>
 
             {(mode === 'login' || mode === 'signup') && (
               <div style={{ marginTop: '0.6rem', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-                <button
+                <RippleButton
                   type="button"
                   onClick={() => handleOAuth(loginWithGoogle)}
                   style={{ width: '100%', padding: '0.95rem', backgroundColor: '#8e1e02', color: '#fff', border: 'none', borderRadius: '10px', fontSize: '1rem', fontWeight: '800', cursor: 'pointer', fontFamily: FONT, transition: 'background 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
                   <img src='/images/Google_Logo.png' alt='Google Logo' style={{ width: '20px', height: '20px', marginRight: '0.5rem', marginTop: '2px' }} />
                   Continue with Google
-                </button>
-                <button
+                </RippleButton>
+                <RippleButton
                   type="button"
                   onClick={() => handleOAuth(loginWithFacebook)}
                   style={{ width: '100%', padding: '0.95rem', backgroundColor: '#073d83', color: '#fff', border: 'none', borderRadius: '10px', fontSize: '1rem', fontWeight: '800', cursor: 'pointer', fontFamily: FONT, transition: 'background 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
                   <img src='/images/Facebook_Logo.png' alt='Facebook Logo' style={{ width: '20px', height: '20px', marginRight: '0.5rem', marginTop: '2px' }} />
                   Continue with Facebook
-                </button>
+                </RippleButton>
               </div>
             )}
           </form>

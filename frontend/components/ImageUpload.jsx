@@ -3,6 +3,7 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useResults } from '@/context/ResultsContext'
 import { auth } from '@/lib/firebase'
+import { RippleButton } from '@/registry/magicui/ripple-button'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
@@ -102,9 +103,9 @@ export default function ImageUpload({ loading, setLoading, scanDone, setScanDone
           {preview ? (
             <>
               <img src={preview} alt="Preview" style={{ maxHeight: '220px', maxWidth: '100%', borderRadius: '8px', objectFit: 'contain' }} />
-              <button onClick={(e) => { e.stopPropagation(); setPreview(null); setSelectedFile(null); setError(null) }} style={{ fontSize: '0.75rem', color: '#4b5e78', background: 'transparent', border: '1px solid #21293a', borderRadius: '6px', padding: '0.3rem 0.75rem', cursor: 'pointer', fontFamily: 'inherit' }}>
+              <RippleButton onClick={(e) => { e.stopPropagation(); setPreview(null); setSelectedFile(null); setError(null) }} style={{ fontSize: '0.75rem', color: '#4b5e78', background: 'transparent', border: '1px solid #21293a', borderRadius: '6px', padding: '0.3rem 0.75rem', cursor: 'pointer', fontFamily: 'inherit' }}>
                 Remove
-              </button>
+              </RippleButton>
             </>
           ) : (
             <>
@@ -117,12 +118,12 @@ export default function ImageUpload({ loading, setLoading, scanDone, setScanDone
                 <p style={{ margin: '0 0 0.35rem', fontWeight: '600', fontSize: '1.1rem', color: '#e0e6f0' }}>Drop your file here</p>
                 <p style={{ margin: 0, color: '#4b5e78', fontSize: '0.9rem' }}>or click to browse</p>
               </div>
-              <button onClick={(e) => { e.stopPropagation(); fileInputRef.current.click() }} style={{ marginTop: '0.5rem', padding: '0.6rem 1.75rem', background: 'linear-gradient(135deg, #2563eb, #38bdf8)', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '0.95rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'inherit' }}>
+              <RippleButton onClick={(e) => { e.stopPropagation(); fileInputRef.current.click() }} style={{ marginTop: '0.5rem', padding: '0.6rem 1.75rem', background: 'linear-gradient(135deg, #2563eb, #38bdf8)', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '0.95rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'inherit' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
                 Select File
-              </button>
+              </RippleButton>
               <p style={{ margin: 0, color: '#2e3d52', fontSize: '0.75rem' }}>Supports: JPEG, PNG, MP4, MOV, WEBM</p>
             </>
           )}
@@ -137,9 +138,9 @@ export default function ImageUpload({ loading, setLoading, scanDone, setScanDone
 
       <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/webm" style={{ display: 'none' }} onChange={(e) => handleFile(e.target.files[0])} />
 
-      <button onClick={handleScan} disabled={!selectedFile || loading} style={{ width: '100%', padding: '0.9rem', backgroundColor: selectedFile && !loading ? '#2563eb' : '#161b27', color: selectedFile && !loading ? '#fff' : '#2e3d52', border: `1px solid ${selectedFile && !loading ? '#2563eb' : '#21293a'}`, borderRadius: '10px', fontSize: '0.85rem', fontWeight: '700', letterSpacing: '3px', textTransform: 'uppercase', cursor: selectedFile && !loading ? 'pointer' : 'not-allowed', transition: 'all 0.2s', fontFamily: 'inherit' }}>
+      <RippleButton onClick={handleScan} disabled={!selectedFile || loading} style={{ width: '100%', padding: '0.9rem', backgroundColor: selectedFile && !loading ? '#2563eb' : '#161b27', color: selectedFile && !loading ? '#fff' : '#2e3d52', border: `1px solid ${selectedFile && !loading ? '#2563eb' : '#21293a'}`, borderRadius: '10px', fontSize: '0.85rem', fontWeight: '700', letterSpacing: '3px', textTransform: 'uppercase', cursor: selectedFile && !loading ? 'pointer' : 'not-allowed', transition: 'all 0.2s', fontFamily: 'inherit' }}>
         {loading ? 'Scanning...' : 'Scan File'}
-      </button>
+      </RippleButton>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { auth } from '../lib/firebase'
 import { logout } from '../lib/auth'
 import { onAuthStateChanged } from 'firebase/auth'
+import { RippleButton } from '@/registry/magicui/ripple-button'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -64,7 +65,7 @@ export default function Navbar() {
         ))}
 
         {user ? (
-          <button
+          <RippleButton
             onClick={logout}
             style={{
               background: 'linear-gradient(135deg, #0f2557 0%, #163d86 52%, #2454b8 100%)',
@@ -83,10 +84,10 @@ export default function Navbar() {
             onMouseLeave={e => e.currentTarget.style.background = 'linear-gradient(135deg, #0f2557 0%, #163d86 52%, #2454b8 100%)'}
           >
             Logout
-          </button>
+          </RippleButton>
         ) : (
           <Link href="/auth" style={{ textDecoration: 'none' }}>
-            <button style={{
+            <RippleButton style={{
               background: 'linear-gradient(135deg, #0f2557 0%, #163d86 52%, #2454b8 100%)',
               border: 'none',
               color: '#ffffff',
@@ -103,7 +104,7 @@ export default function Navbar() {
               onMouseLeave={e => e.currentTarget.style.background = 'linear-gradient(135deg, #0f2557 0%, #163d86 52%, #2454b8 100%)'}
             >
               Login
-            </button>
+            </RippleButton>
           </Link>
         )}
       </div>

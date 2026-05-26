@@ -7,7 +7,7 @@ export default function GamePage() {
 
   return (
     <div style={{
-      background: theme.bg,
+      background: 'transparent',
       color: theme.text,
       height: 'calc(100vh - 72px)',
       padding: '1.5rem 0.5rem 1rem',

@@ -20,9 +20,10 @@ export function ThemeProvider({ children }) {
   }, [darkMode])
 
   const toggleDarkMode = () => setDarkMode(prev => !prev)
+  const setThemeMode = (mode) => setDarkMode(mode === 'dark')
 
   const theme = useMemo(() => ({
-    bg: darkMode ? '#0f172a' : '#f4f6fb',
+    bg: darkMode ? '#0f172a' : '#ffffff',
     cardBg: darkMode ? '#1e293b' : '#ffffff',
     text: darkMode ? '#f8fafc' : '#0f172a',
     border: darkMode ? '#334155' : '#e2e8f0',
@@ -32,7 +33,7 @@ export function ThemeProvider({ children }) {
   }), [darkMode])
 
   return (
-    <ThemeContext.Provider value={{ darkMode, toggleDarkMode, theme }}>
+    <ThemeContext.Provider value={{ darkMode, toggleDarkMode, setThemeMode, theme }}>
       {children}
     </ThemeContext.Provider>
   )

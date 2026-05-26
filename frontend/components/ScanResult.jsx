@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { useTheme } from '@/context/ThemeContext'
+import { RippleButton } from '@/registry/magicui/ripple-button'
 
 const FONT   = "'Jost', sans-serif"
 
@@ -180,9 +181,9 @@ function HeatmapDisplay({ fileUrl, fileType, regions, scanId, spectrogram_image 
           </p>
         </div>
         {isImage && (
-          <button onClick={() => setShow(s => !s)} style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: theme.bg, border: `1px solid ${theme.border}`, color: theme.muted, borderRadius: '10px', padding: '0.5rem 1rem', cursor: 'pointer', fontSize: '0.9rem', fontFamily: FONT, fontWeight: '600', transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease' }}>
+          <RippleButton onClick={() => setShow(s => !s)} style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: theme.bg, border: `1px solid ${theme.border}`, color: theme.muted, borderRadius: '10px', padding: '0.5rem 1rem', cursor: 'pointer', fontSize: '0.9rem', fontFamily: FONT, fontWeight: '600', transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease' }}>
             {show ? 'Hide' : 'Show'}
-          </button>
+          </RippleButton>
         )}
       </CardHeader>
       <CardBody>

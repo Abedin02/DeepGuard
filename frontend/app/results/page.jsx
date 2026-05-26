@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useTheme } from '@/context/ThemeContext'
 import { auth } from '@/lib/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
+import { RippleButton } from '@/registry/magicui/ripple-button'
 
 const FONT = "'Jost', sans-serif"
 
@@ -20,7 +21,7 @@ export default function Results() {
   }, [])
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: theme.bg, padding: '3rem 2rem', fontFamily: FONT, transition: 'background-color 0.3s ease' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: 'transparent', padding: '3rem 2rem', fontFamily: FONT, transition: 'background-color 0.3s ease' }}>
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
 
         {/* Header */}
@@ -34,12 +35,12 @@ export default function Results() {
             </p>
           </div>
           {results.length > 0 && (
-            <button onClick={clearResults} style={{ padding: '0.5rem 1.25rem', backgroundColor: 'transparent', border: '1px solid #fca5a5', color: '#ef4444', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '700', fontFamily: FONT, transition: 'background 0.2s' }}
+            <RippleButton onClick={clearResults} style={{ padding: '0.5rem 1.25rem', backgroundColor: 'transparent', border: '1px solid #fca5a5', color: '#ef4444', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '700', fontFamily: FONT, transition: 'background 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.backgroundColor = '#fef2f2'}
               onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
             >
               Clear All
-            </button>
+            </RippleButton>
           )}
         </div>
 
@@ -51,12 +52,12 @@ export default function Results() {
             </svg>
             <p style={{ margin: '0 0 0.5rem', fontSize: '1.1rem', fontWeight: '700', color: theme.text, fontFamily: FONT }}>Sign in to view your scan history</p>
             <p style={{ margin: '0 0 1.5rem', fontSize: '0.9rem', fontFamily: FONT }}>Scan history is only available for registered users. Your scans are saved securely to your account.</p>
-            <button
+            <RippleButton
               onClick={() => router.push('/auth')}
               style={{ padding: '0.7rem 2rem', backgroundColor: theme.primary, color: '#fff', border: 'none', borderRadius: '10px', cursor: 'pointer', fontFamily: FONT, fontWeight: '700', fontSize: '0.95rem' }}
             >
               Sign In / Create Account
-            </button>
+            </RippleButton>
           </div>
         ) : (
 
@@ -80,7 +81,7 @@ export default function Results() {
                 onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 6px 24px rgba(30,58,138,0.12)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
                 onMouseLeave={e => { e.currentTarget.style.boxShadow = theme.boxShadow; e.currentTarget.style.transform = 'translateY(0)' }}
               >
-                <button
+                <RippleButton
                   onClick={e => { e.stopPropagation(); deleteResult(item.scan_id || item.id) }}
                   title="Delete scan"
                   style={{ position: 'absolute', top: '8px', right: '8px', zIndex: 20, width: '26px', height: '26px', borderRadius: '50%', backgroundColor: '#ef4444', border: '2px solid white', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,0.3)' }}
@@ -88,7 +89,7 @@ export default function Results() {
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round">
                     <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                   </svg>
-                </button>
+                </RippleButton>
                 {/* Thumbnail */}
                 <div style={{ width: '100%', height: '160px', overflow: 'hidden', backgroundColor: '#f8fafc' }}>
                   {item.file_type === 'audio' ? (
@@ -167,9 +168,9 @@ export default function Results() {
               </svg>
               <p style={{ margin: '0 0 1.25rem', fontSize: '1rem', fontWeight: '600', color: theme.text, fontFamily: FONT, transition: 'color 0.3s ease' }}>No scans yet</p>
               <p style={{ margin: '0 0 1.5rem', fontSize: '0.9rem', fontFamily: FONT }}>Upload an image on the home page to get started.</p>
-              <button onClick={() => router.push('/')} style={{ padding: '0.65rem 1.5rem', backgroundColor: theme.primary, color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontFamily: FONT, fontWeight: '700', fontSize: '0.9rem', transition: 'background-color 0.3s ease' }}>
+              <RippleButton onClick={() => router.push('/')} style={{ padding: '0.65rem 1.5rem', backgroundColor: theme.primary, color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontFamily: FONT, fontWeight: '700', fontSize: '0.9rem', transition: 'background-color 0.3s ease' }}>
                 Go to Scanner
-              </button>
+              </RippleButton>
             </div>
           )}
         </div>
